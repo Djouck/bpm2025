@@ -52,6 +52,7 @@ df = pm4py.convert_to_dataframe(log)
 
 
 df = df[['concept:name', 'time:timestamp', 'case:concept:name']]
+case_node_thresholds = df['case:concept:name'].value_counts().to_dict()
 #df = df[0:10000]
 
 #df = df[df['case:Rfp-id'].str.strip() == 'request for payment 73550']
@@ -161,8 +162,8 @@ for index, r in df.iterrows():
         dCaLE[cID] = copy.deepcopy(newL)
     else:
         dCaLE[cID] = copy.deepcopy([ev.activity])
-    if ev.activity == 'END':
-        del dCaLE[ev.case]
+    if len(dCaLE[cID]) >= case_node_thresholds[cID]:
+        del dCaLE[cID]
 
     state = copy.deepcopy(dCaLE)
 
