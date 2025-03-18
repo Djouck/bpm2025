@@ -53,9 +53,6 @@ df = pm4py.convert_to_dataframe(log)
 df = df[['concept:name', 'time:timestamp', 'case:concept:name']]
 
 df = df[0:10000]
-#df = df[df['case:Rfp-id'].str.strip() == 'request for payment 73550']
-#df.to_csv('prova.csv')
-#hhhh
 
 # useful for mapping with instance-graphs file
 df['case_number_id_graphs'] = (
@@ -90,38 +87,6 @@ df['remainingTime_minutes'] = df['remainingTime_sec'] / 60
 df['remainingTime_hours'] = df['remainingTime_sec'] / 3600
 df['remainingTime_days'] = df['remainingTime_sec'] / 86400
 
-
-
-# Add columns for
-# 1) time between event and previous event
-# 2) time between event and start event
-# 3) time between event and previous sunday at midnight. (00:00)
-
-# 2) time between event and start event
-
-# Create dictionary for min timestamp per case
-#dStartTi = df.groupby("case:concept:name")["time:timestamp"].min().astype(str).to_dict()
-
-
-#def calculate_time_from_start(row):
-    #try:
-    #    min_time = datetime.strptime(str(dStartTi[row["case:concept:name"]]), '%Y-%m-%d %H:%M:%S.%f%z')
-    #except ValueError:
-    #    min_time = datetime.strptime(str(dStartTi[row["case:concept:name"]]), '%Y-%m-%d %H:%M:%S%z')
-    #try:
-    #    actual_time = datetime.strptime(str(row["time:timestamp"]), '%Y-%m-%d %H:%M:%S.%f%z')
-   #except ValueError:
-    #    actual_time = datetime.strptime(str(row["time:timestamp"]), '%Y-%m-%d %H:%M:%S%z')
-    #return (actual_time-min_time).total_seconds()
-
-
-#df['Time_from_Start_sec'] = df.apply(calculate_time_from_start, axis=1)
-
-
-# 1) time between event and previous event
-
-
-# ---------------------------------------------------------------------------------------
 
 df['Index'] = df.index
 df['time:timestamp'] = df['time:timestamp'].dt.round('1s')

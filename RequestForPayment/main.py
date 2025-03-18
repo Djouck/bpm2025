@@ -61,13 +61,13 @@ df['time:timestamp'] = df['time:timestamp'].dt.round('1s')
 df.sort_values(by=['time:timestamp', 'Index'], inplace=True)
 
 df['time:timestamp'] = pd.to_datetime(df['time:timestamp'])
-# Trova la data minima nel dataset
+
 start_date = df['time:timestamp'].min()
 
-# Definisci la data limite (un mese dopo)
+
 end_date = start_date + pd.DateOffset(months=12)
 
-# Filtra solo gli eventi nel primo mese
+
 df = df[(df['time:timestamp'] >= start_date) & (df['time:timestamp'] < end_date)]
 # df["Status_ALL"] = None
 dCaLE = {}  # dictionary of Cases and List of Events occurred
