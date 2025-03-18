@@ -44,7 +44,7 @@ def split_list(lst, val):
     return [list(group) for k, group in itertools.groupby(lst, lambda x: x == val) if not k]
 
 
-input_file_path = 'andrea_bpi12w.xes'
+input_file_path = 'bpi12w.xes'
 
 # Write to Pandas Dataframe
 log = pm4py.read_xes(input_file_path)
@@ -169,7 +169,7 @@ if not os.path.exists("Instance_graphs"):
     os.makedirs("Instance_graphs")
 
 # We first need to open the IG_file in reading mode
-with open('andrea_bpi12w.g', 'r') as file:
+with open('bpi12w.g', 'r') as file:
     reader = file.readlines()
     instance_graphs = split_list(reader, 'XP\n')
     i = 1
